@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectLemon"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="600">
+        WindowStartupLocation="CenterScreen"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Title="MainWindow" Height="600" Width="800"
+        WindowState="Maximized"        
+        >
     <Grid>
         <DataGrid AutoGenerateColumns="False" ColumnWidth="*" x:Name="authTable" Margin="192.5,246,139,119.5">
             <DataGrid.Columns>

@@ -6,6 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="0488f3b71aa14656a779f574a597230e" Name="Diagram1">
         <EntityTypeShape EntityType="lemonDbModel.c_request" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="lemonDbModel.auth" Width="1.5" PointX="7.875" PointY="0.875" />
+        <EntityTypeShape EntityType="lemonDbModel.fio" Width="1.5" PointX="3.375" PointY="0.875" />
+        <EntityTypeShape EntityType="lemonDbModel.person" Width="1.5" PointX="5.625" PointY="1" />
+        <AssociationConnector Association="lemonDbModel.FK_auth_0_0" />
+        <AssociationConnector Association="lemonDbModel.FK_person_0_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

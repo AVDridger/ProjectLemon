@@ -4,7 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище lemonDbModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\develop\reposGit\CloneProject\ProjectLemon\ProjectLemon\bin\Debug\lemonDb.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище lemonDbModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\develop\reposGit\CloneProject\ProjectLemon\ProjectLemon\bin\Debug\lemonDb.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="auth">
+          <Key>
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="auth_id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="person_id" Type="integer" />
+          <Property Name="login" Type="varchar" MaxLength="2147483647" />
+          <Property Name="password" Type="varchar" MaxLength="2147483647" />
+        </EntityType>
         <EntityType Name="c_request">
           <Key>
             <PropertyRef Name="request_id" />
@@ -14,11 +23,61 @@
           <Property Name="status_id" Type="integer" />
           <Property Name="desc" Type="varchar" MaxLength="2147483647" />
         </EntityType>
+        <EntityType Name="fio">
+          <Key>
+            <PropertyRef Name="fio_id" />
+          </Key>
+          <Property Name="fio_id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="2147483647" />
+          <Property Name="surname" Type="varchar" MaxLength="2147483647" />
+          <Property Name="patronymic" Type="varchar" MaxLength="2147483647" />
+        </EntityType>
+        <EntityType Name="person">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fio_id" Type="integer" />
+        </EntityType>
+        <Association Name="FK_auth_0_0">
+          <End Role="person" Type="Self.person" Multiplicity="0..1" />
+          <End Role="auth" Type="Self.auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="auth">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_person_0_0">
+          <End Role="fio" Type="Self.fio" Multiplicity="0..1" />
+          <End Role="person" Type="Self.person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fio">
+              <PropertyRef Name="fio_id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="fio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище lemonDbModelContainer">
+          <EntitySet Name="auth" EntityType="Self.auth" store:Type="Tables" />
           <EntitySet Name="c_request" EntityType="Self.c_request" store:Type="Tables" />
+          <EntitySet Name="fio" EntityType="Self.fio" store:Type="Tables" />
+          <EntitySet Name="person" EntityType="Self.person" store:Type="Tables" />
+          <AssociationSet Name="FK_auth_0_0" Association="Self.FK_auth_0_0">
+            <End Role="person" EntitySet="person" />
+            <End Role="auth" EntitySet="auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_person_0_0" Association="Self.FK_person_0_0">
+            <End Role="fio" EntitySet="fio" />
+            <End Role="person" EntitySet="person" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="lemonDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -33,7 +92,71 @@
         </EntityType>
         <EntityContainer Name="lemonDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="c_request" EntityType="Self.c_request" />
+          <EntitySet Name="auth" EntityType="lemonDbModel.auth" />
+          <EntitySet Name="fio" EntityType="lemonDbModel.fio" />
+          <EntitySet Name="person" EntityType="lemonDbModel.person" />
+          <AssociationSet Name="FK_auth_0_0" Association="lemonDbModel.FK_auth_0_0">
+            <End Role="person" EntitySet="person" />
+            <End Role="auth" EntitySet="auth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_person_0_0" Association="lemonDbModel.FK_person_0_0">
+            <End Role="fio" EntitySet="fio" />
+            <End Role="person" EntitySet="person" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="auth">
+          <Key>
+            <PropertyRef Name="auth_id" />
+          </Key>
+          <Property Name="auth_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="person_id" Type="Int64" />
+          <Property Name="login" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="person" Relationship="lemonDbModel.FK_auth_0_0" FromRole="auth" ToRole="person" />
+        </EntityType>
+        <EntityType Name="fio">
+          <Key>
+            <PropertyRef Name="fio_id" />
+          </Key>
+          <Property Name="fio_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="person" Relationship="lemonDbModel.FK_person_0_0" FromRole="fio" ToRole="person" />
+        </EntityType>
+        <EntityType Name="person">
+          <Key>
+            <PropertyRef Name="person_id" />
+          </Key>
+          <Property Name="person_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fio_id" Type="Int64" />
+          <NavigationProperty Name="auth" Relationship="lemonDbModel.FK_auth_0_0" FromRole="person" ToRole="auth" />
+          <NavigationProperty Name="fio" Relationship="lemonDbModel.FK_person_0_0" FromRole="person" ToRole="fio" />
+        </EntityType>
+        <Association Name="FK_auth_0_0">
+          <End Type="lemonDbModel.person" Role="person" Multiplicity="0..1" />
+          <End Type="lemonDbModel.auth" Role="auth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="person_id" />
+            </Principal>
+            <Dependent Role="auth">
+              <PropertyRef Name="person_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_person_0_0">
+          <End Type="lemonDbModel.fio" Role="fio" Multiplicity="0..1" />
+          <End Type="lemonDbModel.person" Role="person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fio">
+              <PropertyRef Name="fio_id" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="fio_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -47,6 +170,34 @@
                 <ScalarProperty Name="parent_id" ColumnName="parent_id" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="desc" ColumnName="desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="auth">
+            <EntityTypeMapping TypeName="lemonDbModel.auth">
+              <MappingFragment StoreEntitySet="auth">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
+                <ScalarProperty Name="auth_id" ColumnName="auth_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fio">
+            <EntityTypeMapping TypeName="lemonDbModel.fio">
+              <MappingFragment StoreEntitySet="fio">
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="fio_id" ColumnName="fio_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="person">
+            <EntityTypeMapping TypeName="lemonDbModel.person">
+              <MappingFragment StoreEntitySet="person">
+                <ScalarProperty Name="fio_id" ColumnName="fio_id" />
+                <ScalarProperty Name="person_id" ColumnName="person_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
