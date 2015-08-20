@@ -28,7 +28,7 @@ namespace ProjectLemon
 
         private void LoadGrid()
         {
-            //lemonDBEntities lem = new lemonDBEntities();
+          
             lemonDbEntities lem = new lemonDbEntities(); //вот эта хрень берется от сюда, но дело не в ней
             var data = from d in lem.c_request select d; //это называется linq запросы
 
