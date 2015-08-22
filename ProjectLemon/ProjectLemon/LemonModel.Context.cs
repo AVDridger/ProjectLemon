@@ -16,7 +16,7 @@ namespace ProjectLemon
     public partial class lemonDbEntities : DbContext
     {
         public lemonDbEntities()
-            : base("name=lemonDbEntities1")
+            : base("name=lemonDbEntities")
         {
         }
     

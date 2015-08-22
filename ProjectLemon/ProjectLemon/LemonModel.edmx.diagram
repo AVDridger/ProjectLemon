@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d7973d3ea20f46c38a0eb7f29736cbcd" Name="Diagram1">
+      <Diagram DiagramId="c42ea531f37a410caa5ee4c9412ca6b3" Name="Diagram1">
         <EntityTypeShape EntityType="lemonDbModel.auth" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="lemonDbModel.c_request" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="lemonDbModel.fio" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />

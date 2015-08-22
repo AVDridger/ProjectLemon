@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище lemonDbModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\develop\reposGit\CloneProject\ProjectLemon\ProjectLemon\database\lemonDb.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище lemonDbModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=D:\develop\reposGit\ProjectLemon\ProjectLemon\ProjectLemon\database\lemonDb.sqlite" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="auth">
           <Key>
             <PropertyRef Name="auth_id" />
@@ -144,7 +144,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="lemonDbEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="lemonDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="auth" EntityType="Self.auth" />
           <EntitySet Name="c_request" EntityType="Self.c_request" />
           <EntitySet Name="fio" EntityType="Self.fio" />
@@ -163,7 +163,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище lemonDbModelContainer" CdmEntityContainer="lemonDbEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище lemonDbModelContainer" CdmEntityContainer="lemonDbEntities">
           <EntitySetMapping Name="auth">
             <EntityTypeMapping TypeName="lemonDbModel.auth">
               <MappingFragment StoreEntitySet="auth">
