@@ -24,10 +24,6 @@ namespace ProjectLemon
         public SplashScreen()
         {
             InitializeComponent();
-
-            
-
-            MessageBox.Show(Environment.CurrentDirectory);
         }
 
         //обработка кнопки вход
